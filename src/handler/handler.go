@@ -19,14 +19,14 @@ func New(db *gorm.DB) handler{
 }
 //-----------------CRUD Profil---------------------------------------------------//
 func (h handler) AddProfil(w http.ResponseWriter, r *http.Request) {
-	// Read to request body
+	// Lire le corp de la requete
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
 		log.Fatalln(err)
 	}
-
+    
 	var profil models.Profil
 	json.Unmarshal(body, &profil)
 
@@ -34,17 +34,17 @@ func (h handler) AddProfil(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
-	// Send a 201 created response
+	// Retourne code 201 quand le profil a ete cree
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode("Created")
 }
 func (h handler) DeleteProfil(w http.ResponseWriter, r *http.Request) {
-    // Read the dynamic id parameter
+    // lire dynamiquement l'id en tant que parametre
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Find the profil by Id
+    // trouver le profil par lid
 
     var profil models.Profil
 
@@ -52,7 +52,7 @@ func (h handler) DeleteProfil(w http.ResponseWriter, r *http.Request) {
         fmt.Println(result.Error)
     }
 
-    // Delete that profil
+    // supprime le profil
     h.DB.Delete(&profil)
 
     w.Header().Add("Content-Type", "application/json")
@@ -73,11 +73,11 @@ func (h handler) GetAllProfils(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h handler) GetProfil(w http.ResponseWriter, r *http.Request) {
-    // Read dynamic id parameter
+    
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Find profil by Id
+    
     var profil models.Profil
 
     if result := h.DB.First(&profil, id); result.Error != nil {
@@ -89,11 +89,11 @@ func (h handler) GetProfil(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(profil)
 }
 func (h handler) UpdateProfil(w http.ResponseWriter, r *http.Request) {
-    // Read dynamic id parameter
+    
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Read request body
+    
     defer r.Body.Close()
     body, err := ioutil.ReadAll(r.Body)
 
@@ -122,7 +122,7 @@ func (h handler) UpdateProfil(w http.ResponseWriter, r *http.Request) {
 }
 //-----------------CRUD GAME---------------------------------------------------//
 func (h handler) AddGame(w http.ResponseWriter, r *http.Request) {
-	// Read to request body
+	
 	defer r.Body.Close()
 	body, err := ioutil.ReadAll(r.Body)
 
@@ -137,17 +137,17 @@ func (h handler) AddGame(w http.ResponseWriter, r *http.Request) {
 		fmt.Println(result.Error)
 	}
 
-	// Send a 201 created response
+	
 	w.Header().Add("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode("Created")
 }
 func (h handler) DeleteGame(w http.ResponseWriter, r *http.Request) {
-    // Read the dynamic id parameter
+    
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Find the gaml by Id
+   
 
     var game models.Game
 
@@ -155,7 +155,7 @@ func (h handler) DeleteGame(w http.ResponseWriter, r *http.Request) {
         fmt.Println(result.Error)
     }
 
-    // Delete that game
+   
     h.DB.Delete(&game)
 
     w.Header().Add("Content-Type", "application/json")
@@ -176,11 +176,11 @@ func (h handler) GetAllGames(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h handler) GetGame(w http.ResponseWriter, r *http.Request) {
-    // Read dynamic id parameter
+    
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Find game by Id
+    
     var game models.Game
 
     if result := h.DB.First(&game, id); result.Error != nil {
@@ -192,11 +192,11 @@ func (h handler) GetGame(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(game)
 }
 func (h handler) UpdateGame(w http.ResponseWriter, r *http.Request) {
-    // Read dynamic id parameter
+    
     vars := mux.Vars(r)
     id, _ := strconv.Atoi(vars["id"])
 
-    // Read request body
+    
     defer r.Body.Close()
     body, err := ioutil.ReadAll(r.Body)
 

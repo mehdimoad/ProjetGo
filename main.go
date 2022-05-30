@@ -13,12 +13,13 @@ func main() {
 	router := mux.NewRouter()
 	DB:=db.Init()
 	h:=handlers.New(DB)
+	//--------------------------Routes profils------------------------------------------------------
 	router.HandleFunc("/profils", h.GetAllProfils).Methods(http.MethodGet)
 	router.HandleFunc("/profils/{id}", h.GetProfil).Methods(http.MethodGet)
 	router.HandleFunc("/profils", h.AddProfil).Methods(http.MethodPost)
 	router.HandleFunc("/profils/{id}", h.UpdateProfil).Methods(http.MethodPut)
 	router.HandleFunc("/profils/{id}", h.DeleteProfil).Methods(http.MethodDelete)
-	//--------------------------------------------------------------------------------
+	//--------------------------Routes games------------------------------------------------------
 	router.HandleFunc("/games", h.GetAllGames).Methods(http.MethodGet)
 	router.HandleFunc("/games/{id}", h.GetGame).Methods(http.MethodGet)
 	router.HandleFunc("/games", h.AddGame).Methods(http.MethodPost)

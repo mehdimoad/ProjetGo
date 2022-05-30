@@ -7,7 +7,7 @@ import (
     "gorm.io/driver/postgres"
     "gorm.io/gorm"
 )
-
+//connexion db
 func Init() *gorm.DB {
     dbURL := "postgres://mehdi:pass@localhost:5432/db_go"
 
@@ -16,7 +16,7 @@ func Init() *gorm.DB {
     if err != nil {
         log.Fatalln(err)
     }
-
+// Migration des tables Profil et Game
     db.AutoMigrate(&models.Profil{})
     db.AutoMigrate(&models.Game{})
     return db
