@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/mehdimoad/ProjetGo/pkg/handler"
-	"github.com/mehdimoad/ProjetGo/pkg/db"
+	"github.com/mehdimoad/ProjetGo/src/handler"
+	"github.com/mehdimoad/ProjetGo/src/db"
 )
 
 func main() {
